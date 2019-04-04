@@ -1,0 +1,40 @@
+<style>
+  form{
+      width:80%;
+      margin: 20px auto;
+  }
+</style>
+<div id="info" class="alert" style="display: none"></div>
+<form method="POST" name="form1" onsubmit="return checkform();">
+  {{#with item}}
+  <div class="form-group">
+    <label for="title">標題：</label>
+    <input type="text" class="login-field" value="{{title}}" id="title" name="title" style="display: none">
+    <h2>{{title}}</h2>
+  </div>
+  <div class="form-group">
+    <label for="name">內容：</label>
+    <textarea name="message" id="message" cols="100" rows="10" style="resize: none;" value="">{{message}}</textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">修改確定</button>
+  {{/with}}
+</form>
+<script>
+  var info = $('#info');
+ function checkform(){
+   $.post('/user-blog/edit/'+form1.title.value,$(form1).serialize(),function(data){
+     if(data.success){
+                info.removeClass('alert-danger');
+                info.addClass('alert-success');
+                info.show();
+                info.html(data.info);
+            } else {
+                info.removeClass('alert-success');
+                info.addClass('alert-danger');
+                info.show();
+                info.html(data.info);
+            }
+   },'json');
+  return false;
+ }
+</script>

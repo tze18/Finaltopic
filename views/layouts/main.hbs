@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh_tw">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>智慧健檢中心</title>
+	<link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+		integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<link rel="shortcut icon" href="/favicon.ico"/>
+	<link rel="bookmark" href="/favicon.ico"/>
+	<script src="/js/jquery-3.3.1.js"></script>
+	<script src="/bootstrap/js/bootstrap.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<style>
+		* {
+			font-family: 'Noto Sans TC', sans-serif;
+		}
+
+		body {
+			background: url('/img/true.jpeg');
+		}
+
+		.toTop-arrow {
+			width: 3rem;
+			height: 3rem;
+			padding: 0;
+			margin: 0;
+			border: 0;
+			border-radius: 33%;
+			opacity: 0.6;
+			background: rgb(51, 51, 51);
+			cursor: pointer;
+			position: fixed;
+			right: 1rem;
+			bottom: 1rem;
+			display: none;
+		}
+
+		.toTop-arrow::before,
+		.toTop-arrow::after {
+			width: 25px;
+			height: 6px;
+			border-radius: 3px;
+			background: rgb(248, 247, 246);
+			position: absolute;
+			content: "";
+		}
+
+		.toTop-arrow::before {
+			transform: rotate(-45deg) translate(0, -50%);
+			left: 0.42rem;
+		}
+
+		.toTop-arrow::after {
+			transform: rotate(45deg) translate(0, -50%);
+			right: 0.42rem;
+		}
+
+		.toTop-arrow:focus {
+			outline: none;
+		}
+	</style>
+</head>
+
+<body>
+	{{>navbars}}
+	{{{body}}}
+	<button type="button" id="BackTop" class="toTop-arrow"></button>
+
+</body>
+
+
+</html>

@@ -1,0 +1,46 @@
+<style>
+    div {
+    width: 85%;
+    margin: 10px auto;
+  }
+  th {
+    width: 8em;
+    text-align: center;
+  }
+  i{
+      font-size: 2em;
+  }
+</style>
+<div>
+    <h1>你儲存的景點：</h1>
+    <table class="table table-striped">
+        <caption></caption>
+        <thead class="table-info">
+            <tr>
+                <th>取消儲存</th>
+                <th scope="col">名稱</th>
+                <th scope="col">介紹</th>
+                <th scope="col">地址</th>
+                <th scope="col">地圖</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each spot}}
+            <tr>
+                <td style="text-align:center"><a href="javascript:remove_item('{{name}}')"><i class="fas fa-trash" style="color: brown"></i></a></td>
+                <td>{{name}}</td>
+                <td>{{desc}}</td>
+                <td>{{addr}}</td>
+                <td style=" width:15em;"><iframe width='100%' height='200' frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q={{addr}}&z=16&output=embed&t='></iframe></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+<script>
+    function remove_item(name) {
+    if (confirm("確定刪除<<" + name + ">>儲存景點?")) {
+      location.href = '/savespot/remove/'+ name;
+    }
+  }
+</script>
