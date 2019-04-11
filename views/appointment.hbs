@@ -1,6 +1,6 @@
 <style>
     .title {
-        width: 40%;
+        width: 70%;
         margin: 50px auto;
         text-align: left;
     }
@@ -8,58 +8,205 @@
     button {
         margin: 5px;
     }
+    th,td{
+        width:300px;
+        border: 1px solid;
+        font-size :1.5em;
+        text-align: center;
+    }
+    .accordion{
+        width: 70%;
+        margin: 50px auto;
+    }
+    .fonts{
+        font-size :1.5em;
+        color: black;
+    }
 </style>
 <div class="title">
     <h1>請選擇科別及醫生：</h1>
-    {{!-- <button type="button" class="btn btn-secondary btn-lg">胸腔科</button>
-    <button type="button" class="btn btn-secondary btn-lg">牙科</button> --}}
-    <ul class="list-unstyled">
-        <li class="media">
-            <img src="img/lungs.jpg" class="mr-3" alt="lungs" width="200">
-            <div class="media-body">
-                <h3 class="mt-0 mb-1">肺科：</h3>
-                <button type="button" class="btn btn-info btn-lg">
-                    <h4>陳醫師</h4>
-                </button>
-                <button type="button" class="btn btn-info btn-lg">
-                    <h4>陳醫師()</h4>
-                </button>
-                <button type="button" class="btn btn-info btn-lg">
-                    <h4>黃醫師</h4>
-                </button>
-            </div>
-        </li>
-        <li class="media my-4">
-            <img src="img/teeth.jpg" class="mr-3" alt="teeth" width="200">
-            <div class="media-body">
-                <h3 class="mt-0 mb-1">牙科：</h3>
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#shao"><h4>邵醫師</h4>
-                </button>
-                <!-- Modal -->
-                <div class="modal fade" id="shao" tabindex="-1" role="dialog"
-                    aria-labelledby="time" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="time">看診時間</h5>
-                            </div>
-                            <form action="#" method="get" enctype="multipart/form-data">
-                                <div class="modal-body">
-                                    
-                                    <input type="date" id="time" name="time">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary">預約</button>
-                                </div>
-                            </form>
+</div>
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link fonts" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          <img src="img/lungs.jpg" class="mr-3" alt="lungs" width="150">
+          肺科
+        </button>
+      </h2>
+    </div>
 
-                        </div>
-                    </div>
-                </div>
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#Liao"><h4>廖醫師</h4>
-                </button>
-            </div>
-        </li>
-    </ul>
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        <table>
+        <tr>
+            <th>診室</th>
+            <th>星期一</th>
+            <th>星期二</th>
+            <th>星期三</th>
+            <th>星期四</th>
+            <th>星期五</th>
+            <th>星期六</th>
+            <th>星期日</th>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td><a href="/appointment/hym">黃大旻</a></td>
+            <td></td>
+            <td><a href="/appointment/hym">黃大旻</a></td>
+            <td></td>
+            <td><a href="/appointment/hym">黃大旻</a></td>
+            <td><a href="/appointment/hym">黃大旻</a></td>
+            <td></td>
+        </tr>
+    </table>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed fonts" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          <img src="img/teeth.jpg" class="mr-3" alt="teeth" width="150">
+          牙科
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+        <table>
+        <tr>
+            <th>診室</th>
+            <th>星期一</th>
+            <th>星期二</th>
+            <th>星期三</th>
+            <th>星期四</th>
+            <th>星期五</th>
+            <th>星期六</th>
+            <th>星期日</th>
+        </tr>
+        <tr>
+            <td>06</td>
+            <td></td>
+            <td><a href="/appointment/shao">邵柏</a></td>
+            <td><a href="/appointment/shao">邵柏</a></td>
+            <td><a href="/appointment/shao">邵柏</a></td>
+            <td><a href="/appointment/shao">邵柏</a></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+      </div>
+    </div>
+  </div>
+    <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed fonts" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          <img src="img/heart.jpg" class="mr-3" alt="heart" width="100">
+          心臟科
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+        <table>
+        <tr>
+            <th>診室</th>
+            <th>星期一</th>
+            <th>星期二</th>
+            <th>星期三</th>
+            <th>星期四</th>
+            <th>星期五</th>
+            <th>星期六</th>
+            <th>星期日</th>
+        </tr>
+        <tr>
+            <td>08</td>
+            <td></td>
+            <td><a href="/appointment/widdy">陳小維</a></td>
+            <td><a href="/appointment/widdy">陳小維</a></td>
+            <td><a href="/appointment/widdy">陳小維</a></td>
+            <td></td>
+            <td><a href="/appointment/widdy">陳小維</a></td>
+            <td></td>
+        </tr>
+    </table>
+      </div>
+    </div>
+  </div>
+    <div class="card">
+    <div class="card-header" id="headingFour">
+      <h2 class="mb-0">
+        <button class="btn btn-link fonts" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          <img src="img/cavity.jpg" class="mr-3" alt="cavity" width="150">
+          胸腔科
+        </button>
+      </h2>
+    </div>
+
+    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+      <div class="card-body">
+        <table>
+        <tr>
+            <th>診室</th>
+            <th>星期一</th>
+            <th>星期二</th>
+            <th>星期三</th>
+            <th>星期四</th>
+            <th>星期五</th>
+            <th>星期六</th>
+            <th>星期日</th>
+        </tr>
+        <tr>
+            <td>17</td>
+            <td><a href="/appointment/tze">陳小澤</a></td>
+            <td></td>
+            <td><a href="/appointment/tze">陳小澤</a></td>
+            <td></td>
+            <td><a href="/appointment/tze">陳小澤</a></td>
+            <td><a href="/appointment/tze">陳小澤</a></td>
+            <td></td>
+        </tr>
+    </table>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingFive">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed fonts" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+          <img src="img/lungs.jpg" class="mr-3" alt="lungs" width="150">
+          氣管科
+        </button>
+      </h2>
+    </div>
+    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+      <div class="card-body">
+        <table>
+        <tr>
+            <th>診室</th>
+            <th>星期一</th>
+            <th>星期二</th>
+            <th>星期三</th>
+            <th>星期四</th>
+            <th>星期五</th>
+            <th>星期六</th>
+            <th>星期日</th>
+        </tr>
+        <tr>
+            <td>01</td>
+            <td><a href="/appointment/chi">廖淇淇</a></td>
+            <td><a href="/appointment/chi">廖淇淇</a></td>
+            <td></td>
+            <td><a href="/appointment/chi">廖淇淇</a></td>
+            <td></td>
+            <td><a href="/appointment/chi">廖淇淇</a></td>
+            <td></td>
+        </tr>
+    </table>
+      </div>
+    </div>
+  </div>
 </div>

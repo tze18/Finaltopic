@@ -40,66 +40,13 @@ app.get("/", (req, res) => {
 });
 //24小時預約掛號
 app.get("/appointment", (req, res) => {
-  const spot = require("./data/spot.json");
-  const dis = require("./data/district.json");
   const data = res.locals.renderData;
-  const area = [];
-  const spotarea = [];
-  const all = [];
-  if (req.url.substring(6) == "") {
-    for (i = 0; i < dis.length; i++) {
-      for (j = 0; j < spot.length; j++) {
-        if(dis[i].Area==spot[j].Add.slice(3,6)){
-          // spot[j].saved="far fa-bookmark"
-          all.push(spot[j]);
-        }   
-      }
-    }
-  } else {
-    for (i = 0; i < dis.length; i++) {
-      if (req.url.substring(6) === encodeURIComponent(dis[i].Area)) {
-        area.push(dis[i]);
-      }
-    }
-    for (i = 0; i < spot.length; i++) {
-      if (
-        req.url.substring(6) === encodeURIComponent(spot[i].Add.slice(3, 6))
-      ){
-        spot[i].saved="far fa-bookmark";
-        spotarea.push(spot[i]);
-      }
-    }
-  }
-  data.all = all;
-  data.area = area;
-  data.spotarea = spotarea;
-  data.dis = dis;
-  if(data && data.loginUser){
-    db.query(
-      "select `name` from spot where admin_id=?",
-      [data.loginUser],
-      (error, results, fields) => {
-        data.savespots = results;
-        console.log(results)
-
-        for(let s in spot){
-          let item = spot[s];
-          for(let ss in results){
-            if(item.Name == results[ss].name.trim()){
-              item.saved = "fas fa-bookmark";
-              console.log(item)
-            }else{
-              item.saved = "far fa-bookmark";
-            }
-          }
-        }
-        res.render("spot", data);
-      });
-  } else {
-    res.render("appointment");
-  }
+  res.render("appointment");
   
 });
+// app.get('/appointment/:name',(req,res)=>{
+//   res.render("appointment-confirm")
+// })
 //即時查詢叫號
 app.get("/number", (req, res) => {
   const restaurant = require("./data/restaurant.json");
