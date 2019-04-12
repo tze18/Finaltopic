@@ -1,100 +1,96 @@
-<style>
-    .login {
-        margin: 100px auto;
-        width: 500px;
-    }
+{{!-- Background css--}}
 
-    .login-screen {
-        background-color: rgb(236, 252, 236);
-        padding: 20px;
-        border-radius: 5px
-    }
+<link rel="stylesheet" href="/style/sign.css">
 
-    .app-title {
-        font-size: 3em;
-        text-align: center;
-        color: #777;
-    }
-
-    .login-form {
-        text-align: center;
-    }
-
-    .control-group {
-        margin-bottom: 10px;
-    }
-
-    label {
-        font-size: 20px;
-    }
-
-    input {
-        text-align: center;
-        background-color: #ECF0F1;
-        border: 2px solid transparent;
-        border-radius: 3px;
-        font-size: 20px;
-        font-weight: 200;
-        width: 250px;
-        transition: border .5s;
-    }
-
-    input:focus {
-        border: 2px solid #3498DB;
-        box-shadow: none;
-    }
-
-    .btn1 {
-        border: 2px solid transparent;
-        background: #3498DB;
-        color: #ffffff;
-        font-size: 16px;
-        line-height: 25px;
-        padding: 10px 0;
-        text-decoration: none;
-        text-shadow: none;
-        border-radius: 3px;
-        box-shadow: none;
-        transition: 0.25s;
-        display: block;
-        width: 250px;
-        margin: 0 auto;
-    }
-
-    .btn1:hover {
-        background-color: #2980B9;
-    }
-
-    .login-link {
-        font-size: 12px;
-        color: #444;
-        display: block;
-        margin-top: 12px;
-    }
-</style>
 {{#if msg}}
     <div class="alert alert-{{msg.type}}">{{msg.info}}</div>
 {{/if}}
-<div class="login">
-    <div class="login-screen">
-        <form method="post">
-            <div class="login-form">
-            <div class="control-group">
-                <label class="login-field-icon fui-user" for="user">輸入帳號：</label>
-            </div>
-            <div class="control-group">
-                <input type="text" class="login-field" value="{{addForm.admin_id}}" id="admin_id" name="admin_id">
-            </div>
+<div class="container">
+	<div class="d-flex justify-content-center h-100">
+		<div class="card">
+			<div class="card-header">
+				<h3>Sign Up</h3>
+				{{!-- <div class="d-flex justify-content-end social_icon">
+					<span><i class="fab fa-facebook-square" id="login-"></i></span>
+					<span><i class="fab fa-google-plus-square"></i></span>
 
-            <div class="control-group">
-                <label class="login-field-icon fui-lock" for="password">輸入密碼：</label>
-            </div>
-            <div class="control-group">
-                <input type="password" class="login-field" value="{{addForm.password}}" id="password" name="password">
-            </div>
-            <button type="submit" class="btn1 btn-primary btn-large btn-block">註冊</button>
-        </div>
-        </form>
-        
-    </div>
+				</div> --}}
+			</div>
+			<div class="card-body">
+				<form method="post">
+                    <div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user-tie"></i></span>
+						</div>
+						<input type="text" class="form-control" placeholder="Name" name="name" id="name" autocomplete="off">
+						
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="text" class="form-control" placeholder="ID" name="user" id="user" autocomplete="off">
+						
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+						<input type="password" class="form-control" placeholder="password" name="password" id="password" autocomplete="off">
+					</div>
+                    <div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-phone-square"></i></span>
+						</div>
+						<input type="text" class="form-control" placeholder="Phone" name="phone" id="phone" autocomplete="off">
+					</div>
+                    <div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
+						</div>
+						<input type="text" class="form-control" placeholder="Mobile" name="mobile" id="mobile" autocomplete="off">
+					</div>
+                    <div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-venus-mars"></i></i></span>
+						</div>
+						<input type="text" class="form-control" placeholder="Male or Female" name="sex" id="sex" autocomplete="off">
+					</div>
+                    <div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-address-card"></i></span>
+						</div>
+						<input type="text" class="form-control" placeholder="address" name="address" id="address" autocomplete="off">
+					</div>
+                    <div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fa fa-calendar"></i></span>
+						</div>
+						<input type="text" class="form-control" placeholder="Birth(Ex:xxxx-xx-xx)" name="Birth" id="Birth" autocomplete="off">
+					</div>
+					{{!-- <div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fa fa-paper-plane"></i></span>
+						</div>
+						<input type="text" class="form-control" placeholder="Line-id" name="line" id="line" autocomplete="off">
+					</div> --}}
+					{{!-- <div class="row align-items-center remember">
+						<input type="checkbox">Remember Me
+					</div> --}}
+					<div class="form-group">
+						<input type="submit" value="Register" class="login_btn" >
+					</div>
+				</form>
+			</div>
+
+			{{!-- <div class="card-footer">
+				<div class="d-flex justify-content-center links">
+					Don't have an account?<a href="#">Sign Up</a>
+				</div>
+				<div class="d-flex justify-content-center">
+					<a href="#">Forgot your password?</a>
+				</div>
+			</div> --}}
+		</div>
+	</div>
 </div>
