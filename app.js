@@ -41,12 +41,20 @@ app.get("/", (req, res) => {
 //24小時預約掛號
 app.get("/appointment", (req, res) => {
   const data = res.locals.renderData;
+  
   res.render("appointment");
   
 });
-// app.get('/appointment/:name',(req,res)=>{
-//   res.render("appointment-confirm")
-// })
+app.get('/appointment/:name',(req,res)=>{
+  // console.log(req)
+  const data = res.locals.renderData;
+  const name = req.params
+  const body = req.body
+  console.log(body)
+  data.name = name
+  res.render("appointment-confirm",data)
+});
+console.log(moment().format("YYYY-MM-DD HH:mm:ss"))
 //即時查詢叫號
 app.get("/number", (req, res) => {
   const restaurant = require("./data/restaurant.json");
@@ -79,7 +87,8 @@ app.get("/number", (req, res) => {
   data.allres = allres;
   data.areares = areares;
   data.dis = dis;
-  res.render("number");
+  data.time = moment().format("YYYY-MM-DD HH:mm:ss")
+  res.render("number",data);
 });
 //症狀查詢
 app.get("/symptoms", (req, res) => {
