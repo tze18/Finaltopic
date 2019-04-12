@@ -8,10 +8,10 @@ const mySQL = require("mysql");
 const moment = require("moment-timezone");
 const sha1 = require('sha1');
 const db = mySQL.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "zaxscd0412",
-  database: "test1",
+  host: "medical.cg1fvo9lgals.ap-southeast-1.rds.amazonaws.com",
+  user: "admin",
+  password: "12345678",
+  database: "medical",
 });
 db.connect();
 app.engine("hbs", exphbs({ defaultLayout: "main", extname: ".hbs" }));
@@ -125,25 +125,41 @@ app.get('/blog',(req,res)=>{
 app.get("/signup", (req, res) => {
   res.render("signup");
 });
+
 app.post('/signup', (req, res)=>{
   const data = res.locals.renderData;
   const val = {
-    admin_id: req.body.admin_id,
+    Name:req.body.name,
+    ID: req.body.user,
     password: sha1(req.body.password),
-    created_at:moment().format("YYYY-MM-DD HH:mm:ss")
+    Tel: req.body.phone,
+    Mobile:req.body.mobile,
+    Sex:req.body.sex,
+    Address:req.body.address,
+    Birth:req.body.Birth,
+    Create_time:moment().format("YYYY-MM-DD HH:mm:ss")
   };
-  data.addForm = val; 
-  if (!req.body.admin_id || !req.body.password) {
+  data.addForm = val;
+  if (!req.body.user || !req.body.password||!req.body.name||!req.body.phone||!req.body.mobile||!req.body.sex||!req.body.address||!req.body.Birth) {
     data.msg = {
       type: "danger",
-      info: "帳號密碼必須輸入",
+      info: "尚有欄位未填",
     };
-    delete data.addForm;
+    // delete data.addForm;
     res.render("signup",data);
     return;
-  }
-  db.query("SELECT * FROM `admins` WHERE `admin_id`=?",
-    [req.body.admin_id],
+  };
+  if(! /^\d{4}\-\d{1,2}\-\d{1,2}$/.test(req.body.Birth))
+  {
+    data.msg = {
+        type: 'danger',
+        info: '生日格式有誤'
+    };
+    res.render('signup', data);
+    return;
+  };
+  db.query("SELECT * FROM `med_basic_info` WHERE `id`=?",
+    [req.body.user],
     (error, results, fields) => {
       if (results.length) {
         data.msg = {
@@ -155,7 +171,7 @@ app.post('/signup', (req, res)=>{
         res.render("signup", data);
         return;
       }
-      const sql = "insert into admins set ?";
+      const sql = "insert into med_basic_info set ?";
       db.query(sql, val, (error, results, fields) => {
         // console.log(results);//看inser結果
         if (error) {
@@ -174,7 +190,7 @@ app.post('/signup', (req, res)=>{
       });
     });
 });
-//登入
+// 登入
 app.get("/login", (req, res) => {
   const data = res.locals.renderData;
   if (req.session.flashMsg) {
@@ -188,12 +204,15 @@ app.post('/login', (req, res)=>{
       [req.body.user, req.body.password],
       (error, results, fields)=>{
           // console.log(results); // debug
+          
           if(! results.length){
               req.session.flashMsg = {
                   type: "danger",
                   msg: "帳號或密碼錯誤"
               };
-          } else {
+          } 
+          
+          else {
               console.log(req.session);
               req.session.loginUser = req.body.user;
               req.session.flashMsg = {
