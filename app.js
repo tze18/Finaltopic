@@ -140,7 +140,7 @@ app.post('/signup', (req, res)=>{
     res.render("signup",data);
     return;
   };
-  (! /^\d{4}\-\d{1,2}\-\d{1,2}$/.test(req.body.Birth))
+  if(! /^\d{4}\-\d{1,2}\-\d{1,2}$/.test(req.body.Birth))
   {
     data.msg = {
         type: 'danger',
@@ -148,7 +148,7 @@ app.post('/signup', (req, res)=>{
     };
     res.render('signup', data);
     return;
-  }
+  };
   db.query("SELECT * FROM `med_basic_info` WHERE `id`=?",
     [req.body.user],
     (error, results, fields) => {
