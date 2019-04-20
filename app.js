@@ -36,13 +36,14 @@ app.use((req, res, next) => {
 });
 //首頁
 app.get("/", (req, res) => {
-  res.render("home");
+  const data=res.locals.renderData
+  res.render("home",data);
 });
 //24小時預約掛號
 app.get("/appointment", (req, res) => {
   const data = res.locals.renderData;
   
-  res.render("appointment");
+  res.render("appointment",data);
   
 });
 app.get('/appointment/:name',(req,res)=>{
@@ -105,22 +106,22 @@ app.get("/symptoms", (req, res) => {
     actfilter[s].End=moment(actfilter[s].End).format('YYYY-MM-DD');
   }
   data.actfilter=actfilter;
-  res.render("symptoms");
+  res.render("symptoms",data);
 });
 //部落格
-app.get('/blog',(req,res)=>{
-  const data = res.locals.renderData;
-  db.query(
-    "select * from post order by createtime desc",
-    (error, results, fields) => {
-      for(let s in results){
-        results[s].createtime=moment(results[s].createtime).format('YYYY-MM-DD HH:mm:ss');
-      }
-      data.blog=results;
-      res.render('blog',data);
-    }
-  );
-});
+// app.get('/blog',(req,res)=>{
+//   const data = res.locals.renderData;
+//   db.query(
+//     "select * from post order by createtime desc",
+//     (error, results, fields) => {
+//       for(let s in results){
+//         results[s].createtime=moment(results[s].createtime).format('YYYY-MM-DD HH:mm:ss');
+//       }
+//       data.blog=results;
+//       res.render('blog',data);
+//     }
+//   );
+// });
 //註冊
 app.get("/signup", (req, res) => {
   res.render("signup");
@@ -200,7 +201,7 @@ app.get("/login", (req, res) => {
   res.render("login", data);
 });
 app.post('/login', (req, res)=>{
-  db.query("SELECT * FROM `admins` WHERE `admin_id`=? AND `password`=SHA1(?)",
+  db.query("SELECT * FROM `med_basic_info` WHERE `id`=? AND `password`=SHA1(?)",
       [req.body.user, req.body.password],
       (error, results, fields)=>{
           // console.log(results); // debug
@@ -210,17 +211,19 @@ app.post('/login', (req, res)=>{
                   type: "danger",
                   msg: "帳號或密碼錯誤"
               };
+              res.redirect('/login');
           } 
           
           else {
               console.log(req.session);
-              req.session.loginUser = req.body.user;
-              req.session.flashMsg = {
-                  type: "success",
-                  msg: "登入成功"
-              };
+              req.session.loginUser = results[0].Name;
+              // req.session.flashMsg = {
+              //     type: "success",
+              //     msg: "登入成功"
+              // };
+              res.redirect('/');
           }
-          res.redirect('/login');
+          
       });
 });
 //登出
