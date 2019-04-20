@@ -45,16 +45,27 @@ app.get("/appointment", (req, res) => {
   res.render("appointment");
   
 });
-app.get('/appointment/:name',(req,res)=>{
+app.get('/appointment/:name/:time?',(req,res)=>{
   // console.log(req)
+  const doctor = require("./data/doctor.json");
   const data = res.locals.renderData;
-  const name = req.params
-  const body = req.body
-  console.log(body)
-  data.name = name
+  const params = req.params
+  console.log(params)
+  console.log(doctor[0].Id)
+  doc = []
+  for(i=0;i <doctor.length;i++){
+    if(params.name == doctor[i].Id){
+      data.name = doctor[i].Name
+      data.sub = doctor[i].Sub
+      data.room = doctor[i].Room
+    }
+  }
+  data.time = params.time
   res.render("appointment-confirm",data)
 });
-console.log(moment().format("YYYY-MM-DD HH:mm:ss"))
+app.post('/appointment/:name/:time?',(req,res)=>{
+  console.log(req.body.id)
+});
 //即時查詢叫號
 app.get("/number", (req, res) => {
   const restaurant = require("./data/restaurant.json");

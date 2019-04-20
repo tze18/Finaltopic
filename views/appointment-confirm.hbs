@@ -1,12 +1,49 @@
 <style>
-
+    td{
+        width:250px;
+        height: 60px;
+        border: 1px solid;
+        font-size :1.5em;
+        text-align: center;
+    }
+    .fonts{
+        font-size :1em;
+        color: black;
+    }
+    table{
+        margin: auto;
+    }
 </style>
 <div>
     <form method="post">
-        <label id="doctor">時間:{{name.name}}</label>
-        <label id="doctor">時段:{{name.name}}</label>
-        <label id="doctor">科別:{{name.name}}</label>
-        <label id="doctor">診室:{{name.name}}</label>
-        <label id="doctor">醫生名稱:{{name.name}}</label>
+        <table>
+            <tr>
+                <td>時間:</td>
+                <td><label name="time">{{time}}</label></td>
+            </tr>
+            <tr>
+                <td>時段:</td>
+                <td><label name="ap"></label></td>
+            </tr>
+            <tr>
+                <td>科別:</td>
+                <td><label name="sub">{{sub}}</label></td>
+            </tr>
+            <tr>
+                <td>診室:</td>
+                <td><label name="room">{{room}}</label></td>
+            </tr>
+            <tr>
+                <td>醫生:</td>
+                <td><input type="text" name="name">{{name}}</td>
+            </tr>
+            <tr>
+                <td>請輸入身分證字號:</td>
+                <td><input type="text" size="13" name="id"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="submit">送出</button></td>
+            </tr>
+        </table>    
     </form>
 </div>
