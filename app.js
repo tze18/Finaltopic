@@ -218,6 +218,7 @@ app.post('/login', (req, res)=>{
           // console.log(results); // debug
           
           if(! results.length){
+              
               req.session.flashMsg = {
                   type: "danger",
                   msg: "帳號或密碼錯誤"
