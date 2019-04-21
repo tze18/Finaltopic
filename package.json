@@ -14,9 +14,9 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.2",
-    "express-session": "^1.15.6",
-    "moment-timezone": "^0.5.23",
-    "mysql": "^2.16.0",
+    "express-session": "^1.16.1",
+    "moment-timezone": "^0.5.25",
+    "mysql": "^2.17.1",
     "sha1": "^1.1.1",
     "url": "^0.11.0"
   }

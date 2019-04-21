@@ -51,8 +51,8 @@ app.get('/appointment/:name/:time?',(req,res)=>{
   const doctor = require("./data/doctor.json");
   const data = res.locals.renderData;
   const params = req.params
-  console.log(params)
-  console.log(doctor[0].Id)
+  // console.log(params)
+  // console.log(doctor[0].Id)
   doc = []
   for(i=0;i <doctor.length;i++){
     if(params.name == doctor[i].Id){
@@ -65,7 +65,45 @@ app.get('/appointment/:name/:time?',(req,res)=>{
   res.render("appointment-confirm",data)
 });
 app.post('/appointment/:name/:time?',(req,res)=>{
-  console.log(req.body.id)
+  // console.log(req.body)
+  const data = res.locals.renderData;
+  db.query("SELECT * FROM `med_basic_info` WHERE `id`=?",
+      [req.body.id],
+      (error, results, fields)=>{
+        if(results.length){
+          const val = {
+            ID: req.body.id,
+            Name:results[0].Name,
+            Sex:results[0].Sex,
+            Subject:req.body.sub,
+            App_time:req.body.time,
+            Doctor:req.body.name,
+          }; 
+          db.query("SELECT *  FROM med_appointment_sub Where Doctor=? and App_time=?;",[req.body.name,req.body.time],(error, results, fields)=>{
+            // val.row= results[0].row+1
+            // console.log(results.length)
+            if(results.length == 0){
+              val.row = 1
+              db.query("insert into med_appointment_sub set ?", val, (error, results, fields) =>{
+              console.log(results)
+            });
+            }
+            else{
+              val.row= results[results.length-1].row+1
+              console.log(val)
+              const sql = "insert into med_appointment_sub set ?";
+              db.query(sql, val, (error, results, fields) =>{
+              console.log(results)
+            });
+            }
+          });
+          res.redirect("/appointment")
+        }
+        else{
+          console.log('身分證輸入錯誤')
+          res.redirect("/singup")
+        }
+      });  
 });
 //即時查詢叫號
 app.get("/number", (req, res) => {
