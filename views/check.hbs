@@ -1,0 +1,48 @@
+<style>
+    div{
+        width:500px;
+        margin: auto;
+    }
+    th{
+        width:150px;
+        height: 60px;
+        border: 1px solid;
+        font-size :1.5em;
+        text-align: center;
+    }
+    td{
+        font-size :1.25em;
+        color: black;
+        border: 1px solid;
+        text-align: center;
+    }
+    table{
+        margin: auto;
+    }
+</style>
+<div>
+    <form method="POST">
+        <label>請輸入身分證字號:</label>
+        <input type="text" name="id">
+        <button type="submit">查詢</button>
+    </form>
+</div>
+<div>
+    <table>
+        {{getval.ID}}
+        <tr>
+            <th>科別:</th>
+            <th>時間:</th>
+            <th>醫生:</th>
+            <th>號碼:</th>
+        </tr>
+        {{#each getval}}
+        <tr>
+            <td>{{Subject}}</td>
+            <td>{{App_time}}</td>
+            <td>{{Doctor}}</td>
+            <td>{{row}}</td>
+        </tr>
+        {{/each}}
+    </table>
+</div>

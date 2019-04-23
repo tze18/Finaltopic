@@ -79,7 +79,7 @@ app.post('/appointment/:name/:time?',(req,res)=>{
             App_time:req.body.time,
             Doctor:req.body.name,
           }; 
-          db.query("SELECT *  FROM med_appointment_sub Where Doctor=? and App_time=?;",[req.body.name,req.body.time],(error, results, fields)=>{
+          db.query("SELECT * FROM med_appointment_sub Where Doctor=? and App_time=?;",[req.body.name,req.body.time],(error, results, fields)=>{
             // val.row= results[0].row+1
             // console.log(results.length)
             if(results.length == 0){
@@ -105,6 +105,29 @@ app.post('/appointment/:name/:time?',(req,res)=>{
         }
       });  
 });
+//查詢掛號
+app.get("/check",(req,res)=>{
+  res.render("check")
+});
+app.post("/check",(req,res)=>{
+  const data = res.locals.renderData;
+  // console.log(req.body.id)
+  db.query("SELECT * FROM med_appointment_sub Where ID=?",[req.body.id],(error, results, fields) =>{
+    // console.log(results)
+    getval = []
+    results.forEach(el => {
+      el.App_time = moment(el.App_time).format("YYYY-MM-DD");
+    });
+    for(i=0;i<results.length;i++){
+      getval.push(results[i])
+    }
+    // console.log(getval[1])
+    return;
+  })
+  data.getval = getval
+  res.render("check",data)
+});
+
 //即時查詢叫號
 app.get("/number", (req, res) => {
   const restaurant = require("./data/restaurant.json");
@@ -139,23 +162,6 @@ app.get("/number", (req, res) => {
   data.dis = dis;
   data.time = moment().format("YYYY-MM-DD HH:mm:ss")
   res.render("number",data);
-});
-//症狀查詢
-app.get("/symptoms", (req, res) => {
-  const activity = require("./data/activity.json");
-  const data = res.locals.renderData;
-  const actfilter = [];
-  for (i = 0; i < activity.length; i++) {
-    if (activity[i].Location.slice(0, 3)=="新北市"){
-      actfilter.push(activity[i]);
-    }
-  }
-  for(let s in actfilter){
-    actfilter[s].Start=moment(actfilter[s].Start).format('YYYY-MM-DD');
-    actfilter[s].End=moment(actfilter[s].End).format('YYYY-MM-DD');
-  }
-  data.actfilter=actfilter;
-  res.render("symptoms",data);
 });
 //部落格
 // app.get('/blog',(req,res)=>{
